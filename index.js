@@ -1,9 +1,17 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const db = require('./db.json');
+const morgan = require('morgan')
+
+const db = require('./db.json')
 
 app.use(bodyParser.json())
+
+morgan.token('body', function getBody (req) {
+  return JSON.stringify(req.body)
+})
+app.use(morgan(':method :url :response-time :body'))
+
 
 let { persons } = db;
 
@@ -22,7 +30,7 @@ app.get('/api/persons', (request, response) => {
   response.json(persons)
 })
 
-app.get('/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   const person = persons.find(person => person.id === id)
   if ( person ) {
@@ -34,7 +42,7 @@ app.get('/persons/:id', (request, response) => {
   }
 })
 
-app.delete('/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   persons = persons.filter(person => person.id !== id)
 
@@ -45,7 +53,7 @@ const generateId = () => {
   return `${ new Date().valueOf() }_${ Math.floor(Math.random() * 1000) }`;
 }
 
-app.post('/persons', (request, response) => {
+app.post('/api/persons', (request, response) => {
   const {name, number} = request.body
 
   let errors = [];
@@ -73,8 +81,8 @@ app.post('/persons', (request, response) => {
   }
   
   const person = {
-    name: name,
-    number: number || false,
+    name,
+    number,
     id: generateId(),
   }
 
