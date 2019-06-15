@@ -1,0 +1,30 @@
+{
+  "name": "fullstackopen-part3",
+  "version": "1.0.0",
+  "description": "exercises for part 3 of fullstackopen 2019",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "server": "json-server -p3000 db.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagossaurus-rex/fullstackopen-part3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tiagossaurus-rex/fullstackopen-part3/issues"
+  },
+  "homepage": "https://github.com/tiagossaurus-rex/fullstackopen-part3#readme",
+  "devDependencies": {
+    "json-server": "^0.15.0",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
